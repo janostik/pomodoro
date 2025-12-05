@@ -1,28 +1,35 @@
 import { useEffect, useRef } from "react";
+import NoSleep from "nosleep.js";
 
 export function useWakeLock(active: boolean) {
     const wakeLockRef = useRef<WakeLockSentinel | null>(null);
+    const noSleepRef = useRef<NoSleep | null>(null);
 
     useEffect(() => {
-        // Check if the browser supports the Wake Lock API
-        const isSupported = "wakeLock" in navigator;
-
-        if (!isSupported) {
-            console.warn("Wake Lock API is not supported in this browser.");
-            return;
-        }
+        const isWakeLockSupported = "wakeLock" in navigator;
 
         async function lock() {
-            try {
-                // Request a screen wake lock
-                wakeLockRef.current = await navigator.wakeLock.request("screen");
-
-                wakeLockRef.current.addEventListener("release", () => {
-                    console.log("Wake lock released");
-                });
-                console.log("Wake lock acquired");
-            } catch (e) {
-                console.error("WakeLock error:", e);
+            if (isWakeLockSupported) {
+                try {
+                    wakeLockRef.current = await navigator.wakeLock.request("screen");
+                    wakeLockRef.current.addEventListener("release", () => {
+                        console.log("Wake lock released");
+                    });
+                    console.log("Wake lock acquired");
+                } catch (e) {
+                    console.error("WakeLock error:", e);
+                }
+            } else {
+                // Fallback for iOS/Safari using NoSleep.js
+                if (!noSleepRef.current) {
+                    noSleepRef.current = new NoSleep();
+                }
+                try {
+                    await noSleepRef.current.enable();
+                    console.log("NoSleep enabled (iOS fallback)");
+                } catch (e) {
+                    console.error("NoSleep error:", e);
+                }
             }
         }
 
@@ -34,6 +41,10 @@ export function useWakeLock(active: boolean) {
                 } catch (e) {
                     console.error("WakeLock release error:", e);
                 }
+            }
+            if (noSleepRef.current) {
+                noSleepRef.current.disable();
+                console.log("NoSleep disabled");
             }
         }
 

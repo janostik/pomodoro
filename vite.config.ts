@@ -8,6 +8,10 @@ export default defineConfig({
 		react(),
 		VitePWA({
 			registerType: "autoUpdate",
+			workbox: {
+				globPatterns: ["**/*.{js,css,html,ico,png,svg,mp3,webmanifest}"],
+				navigateFallback: "/index.html",
+			},
 			includeAssets: [
 				"favicon.ico",
 				"favicon-16x16.png",
@@ -18,6 +22,8 @@ export default defineConfig({
 				name: "Pomodoro",
 				short_name: "Pomodoro",
 				description: "Offline Pomodoro Timer",
+				start_url: "/",
+				scope: "/",
 				theme_color: "#ffffff",
 				background_color: "#ffffff",
 				display: "standalone",

@@ -376,7 +376,7 @@ export default function TimerPage() {
 
 	return (
 		<div className="flex flex-col md:flex-row items-center md:justify-center min-h-full w-full bg-background text-foreground p-4 gap-6 md:gap-8 transition-colors duration-300 overflow-y-auto">
-			<div className="flex flex-col items-center">
+			<div className="flex flex-col items-center mt-4 md:mt-0">
 				<div ref={containerRef} className="relative">
 					<canvas
 						ref={canvasRef}
