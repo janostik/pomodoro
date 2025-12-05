@@ -1,0 +1,40 @@
+{
+	"name": "pomodoro",
+	"private": true,
+	"version": "0.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "vite",
+		"build": "tsc -b && vite build",
+		"lint": "biome check .",
+		"format": "biome format . --write",
+		"check": "biome check . --write",
+		"preview": "pnpm build && vite preview --host"
+	},
+	"dependencies": {
+		"@radix-ui/react-slot": "^1.2.4",
+		"class-variance-authority": "^0.7.1",
+		"clsx": "^2.1.1",
+		"framer-motion": "^12.23.25",
+		"lucide-react": "^0.555.0",
+		"react": "^19.2.0",
+		"react-dom": "^19.2.0",
+		"tailwind-merge": "^3.4.0"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.3.8",
+		"@tailwindcss/postcss": "^4.1.17",
+		"@types/node": "^24.10.1",
+		"@types/react": "^19.2.5",
+		"@types/react-dom": "^19.2.3",
+		"@vitejs/plugin-react": "^5.1.1",
+		"autoprefixer": "^10.4.22",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.17",
+		"typescript": "~5.9.3",
+		"ultracite": "^6.3.8",
+		"vite": "^7.2.4",
+		"vite-plugin-pwa": "^1.2.0"
+	},
+	"packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
+}
